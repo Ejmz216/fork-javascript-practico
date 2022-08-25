@@ -6,14 +6,17 @@ const shopCart = document.querySelector('.navbar-shopping-cart');
 /* Menus */
 const DesktopMenu = document.querySelector('.desktop-menu');
 const MobileMenu = document.querySelector('.mobile-menu');
-const ShopMenu = document.querySelector('.product-detail');
+const ShopMenu = document.querySelector('#shoppingCartContainer');
 
 /* CONTENERDORES  */
+const productDetailContainer = document.querySelector('#productDetail');
 const cardsContainer = document.querySelector('.cards-container');
+const CloseIcon = document.querySelector('.productDetail-close');
 
 email.addEventListener('click', toggleDMenu);
 iconoM.addEventListener('click', toggleMMenu);
 shopCart.addEventListener('click', toggleSMenu);
+CloseIcon.addEventListener('click',CloseDetail);
 
 function toggleDMenu() {
     DesktopMenu.classList.toggle('inactive');
@@ -31,6 +34,12 @@ function toggleSMenu() {
     DesktopMenu.classList.add('inactive');
     MobileMenu.classList.add('inactive');
     ShopMenu.classList.toggle('inactive');
+}
+function OpenDetail()  {
+    productDetailContainer.classList.remove('inactive');
+}
+function CloseDetail()  {
+    productDetailContainer.classList.add('inactive');
 }
 
 const productList = [];
@@ -57,6 +66,7 @@ function renderProducts(arreglo) {
         // product= {name, price, image} -> product.image
             const productImg = document.createElement('img');
             productImg.setAttribute('src', product.image);
+            productImg.addEventListener('click', OpenDetail);
 
             const productInfo = document.createElement('div');
             productInfo.classList.add('product-info');
